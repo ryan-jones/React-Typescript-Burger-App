@@ -21,6 +21,10 @@ const buildControls = (props: IBuildControls): JSX.Element => (
 								removed={() => props.ingredientRemoved(control.type)}
 								disabled={props.disabled[control.type]} />
 		})}
+		<button 
+			className='order'
+			disabled={!props.purchaseable}
+			onClick={() => props.activateModal()}>Order Now</button>
 	</div>
 );
 

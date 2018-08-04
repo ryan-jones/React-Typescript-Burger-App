@@ -8,7 +8,9 @@ export default interface IBuildControl {
 
 export interface IBuildControls {
     price: number;
+    purchaseable: boolean;
     ingredientAdded: (type: string) => void;
     ingredientRemoved: (type: string) => void;
+    activateModal: () => void;
     disabled: object;
 }
