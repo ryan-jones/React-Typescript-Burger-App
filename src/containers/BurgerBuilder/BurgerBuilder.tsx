@@ -3,7 +3,7 @@ import BuildControls from '../../components/BuildControls/BuildControls';
 import Burger from '../../components/Burger/Burger';
 import OrderSummary from '../../components/OrderSummary/OrderSummary';
 import Modal from '../../components/UI/Modal/Modal';
-import IBurgerState from '../../models/Burger.model';
+import { IBurgerState } from '../../models/Burger.model';
 import Ingredients, { INGREDIENT_PRICES } from '../../models/Ingredients.model';
 
 
@@ -60,15 +60,24 @@ class BurgerBuilder extends React.Component {
 
 	public purchaseHandler = (): void => this.setState({ modalActive: true });
 
-	public render() {
+	public purchaseCancelHandler = ():void => this.setState({ modalActive: false });
+
+	public purchaseContinueHandler = (): void => alert('continue');
+
+	public render(): JSX.Element {
 
 		const disabledInfo = { ...this.state.ingredients };
 		Object.keys(disabledInfo).forEach(key => disabledInfo[key] = this.state.ingredients[key] <= 0);
 		
 		return (
 			<React.Fragment>
-				<Modal show={this.state.modalActive}>
-					<OrderSummary ingredients={this.state.ingredients}/>
+				<Modal show={this.state.modalActive} modalClosed={this.purchaseCancelHandler}>
+					<OrderSummary 
+						ingredients={this.state.ingredients}
+						totalPrice={this.state.totalPrice}
+						purchaseCanceled={this.purchaseCancelHandler}
+						purchaseContinued={this.purchaseContinueHandler}
+						/>
 				</Modal>
 				<Burger {...this.state.ingredients}/>
 				<BuildControls 

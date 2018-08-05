@@ -1,17 +1,31 @@
 import * as React from 'react';
+import Backdrop from '../Backdrop/Backdrop';
 import './Modal.scss';
+import { IModalProps } from '../../../models/UIComponents.model';
 
-const modal = (props: any): JSX.Element => {
-	const styles = { 
-		opacity: props.show ? 1 : 0, 
-		transform: props.show ? 'translateY(0)' : 'translateY(-100vh)'
-	} 
-	return (
-		<div className='Modal' style={ styles }>
-			{props.children}
-		</div>
-	);
+
+class Modal extends React.Component {
+
+	public props: IModalProps;
+
+	public shouldComponentUpdate(nextProps: IModalProps, nextState: React.ComponentState) {
+		return (nextProps.show !== this.props.show)
+	}
+
+	public render(): JSX.Element {
+		const styles = { 
+			opacity: this.props.show ? 1 : 0, 
+			transform: this.props.show ? 'translateY(0)' : 'translateY(-100vh)'
+		} 
+		return (
+			<React.Fragment>
+				<Backdrop show={this.props.show} dismissed={this.props.modalClosed}/>
+				<div className='Modal' style={ styles }>
+					{this.props.children}
+				</div>
+			</React.Fragment>
+		);
+	}
 }
 
-
-export default modal;
+export default Modal;

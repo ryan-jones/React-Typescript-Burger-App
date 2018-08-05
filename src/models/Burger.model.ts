@@ -1,10 +1,15 @@
 import Ingredients from "./Ingredients.model";
 
-interface IBurgerState {
+export interface IBurgerState {
 	ingredients: Ingredients;
 	totalPrice: number;
 	purchaseable: boolean;
 	modalActive: boolean;
 }
 
-export default IBurgerState;
+export interface IOrderSummary {
+	ingredients: Ingredients;
+	totalPrice: number;
+	purchaseCanceled: () => void;
+	purchaseContinued: () => void;
+}
