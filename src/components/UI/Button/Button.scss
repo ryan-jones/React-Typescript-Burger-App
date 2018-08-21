@@ -1,13 +1,14 @@
 button {
-  background-color: transparent;
+  background-color: #0000b3;
   border: none;
   color: white;
   outline: none;
   cursor: pointer;
   font: inherit;
-  padding: 10px;
-  margin: 10px;
+  padding: 1em;
+  margin: 1em;
   font-weight: bold;
+  border-radius: 5px;
 
   &:first-of-type {
     margin-left: 0;

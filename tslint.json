@@ -14,6 +14,7 @@
     "no-console": false,
     "jsx-no-lambda": false,
     "jsx-self-close": false,
-    "ordered-imports": false
+    "ordered-imports": false,
+    "object-literal-sort-keys": false
   }
 }

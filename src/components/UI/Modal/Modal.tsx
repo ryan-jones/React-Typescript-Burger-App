@@ -9,7 +9,7 @@ class Modal extends React.Component {
 	public props: IModalProps;
 
 	public shouldComponentUpdate(nextProps: IModalProps, nextState: React.ComponentState) {
-		return (nextProps.show !== this.props.show)
+		return (nextProps.show !== this.props.show || nextProps.children !== this.props.children);
 	}
 
 	public render(): JSX.Element {

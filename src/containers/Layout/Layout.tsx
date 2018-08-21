@@ -15,7 +15,7 @@ class Layout extends React.Component {
 		this.setState( (prevState: any) => ({ showSideDrawer: !prevState.showSideDrawer }));
 	}
 
-	public render() {
+	public render(): JSX.Element {
 		return (
 			<React.Fragment>
 				<Toolbar drawerToggleClicked={this.sideDrawerToggleHandler}/>

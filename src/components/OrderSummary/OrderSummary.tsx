@@ -8,7 +8,7 @@ class OrderSummary extends React.Component {
 
 	public render(): JSX.Element {
 
-		const summary = Object.keys(this.props.ingredients)
+		const summary: JSX.Element[] = Object.keys(this.props.ingredients)
 			.map((key, index) => (
 				<li key={key + index}>
 					<span className='capitalize'>{key}</span>: {this.props.ingredients[key]}

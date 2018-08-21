@@ -5,6 +5,7 @@ export interface IBurgerState {
 	totalPrice: number;
 	purchaseable: boolean;
 	modalActive: boolean;
+	loading: boolean;
 }
 
 export interface IOrderSummary {
