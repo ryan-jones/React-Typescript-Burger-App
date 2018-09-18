@@ -4,6 +4,7 @@ import './ContactData.scss';
 import axiosInstance from '../../../axios/orders';
 import Spinner from '../../../components/UI/Spinner/Spinner';
 import Input from '../../../components/UI/Input/Input';
+import { connect } from 'react-redux';
 
 class ContactData extends React.Component<any, any> {
 
@@ -124,7 +125,7 @@ class ContactData extends React.Component<any, any> {
     this.setState({ orderForm: updatedOrderForm });
   }
 
-  public checkValidity = (value: any, rules: any): boolean => {
+  public checkValidity = (value: string, rules: any): boolean => {
     let isValid = true;
 
     if (rules.required && isValid) {
@@ -172,4 +173,9 @@ class ContactData extends React.Component<any, any> {
 
 }
 
-export default ContactData;
+const mapStateToProps = (state: any) => ({
+  price: state.totalPrice,
+  ingredients: state.ingredients
+})
+
+export default connect(mapStateToProps)(ContactData);

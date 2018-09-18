@@ -1,9 +1,6 @@
 import Ingredients from "./Ingredients.model";
 
 export interface IBurgerState {
-	ingredients: Ingredients;
-	totalPrice: number;
-	purchaseable: boolean;
 	modalActive: boolean;
 	loading: boolean;
 }

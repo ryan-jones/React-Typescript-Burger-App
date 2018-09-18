@@ -6,11 +6,9 @@ export const INGREDIENT_PRICES = {
 };
 
 
-interface Ingredients {
+export default interface Ingredients {
     bacon?: number;
     cheese?: number;
     meat?: number;
 	salad?: number;
 };
-
-export default Ingredients;
