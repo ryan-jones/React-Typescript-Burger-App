@@ -1,5 +1,5 @@
 button {
-  background-color: #0000b3;
+  background-color: transparent;
   border: none;
   color: white;
   outline: none;
@@ -9,11 +9,6 @@ button {
   margin: 1em;
   font-weight: bold;
   border-radius: 5px;
-
-  &:first-of-type {
-    margin-left: 0;
-    padding-left: 0;
-  }
 
   &.Success {
     color: #5C9210;

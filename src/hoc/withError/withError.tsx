@@ -1,6 +1,5 @@
 import * as React from 'react';
 import Modal from '../../components/UI/Modal/Modal';
-import { AxiosRequestConfig, AxiosResponse } from '../../../node_modules/axios';
 
 const withErrorHandler = (WrappedComponent: any, axios: any) => {
   return class extends React.Component {
@@ -12,8 +11,8 @@ const withErrorHandler = (WrappedComponent: any, axios: any) => {
       hasError: false
     }
 
-    public reqInterceptor: AxiosRequestConfig;
-    public resInterceptor: AxiosResponse;
+    public reqInterceptor: any;
+    public resInterceptor: any;
 
     public componentDidMount(): void {
       this.reqInterceptor = axios.interceptors.request.use((req: any) => {
@@ -23,11 +22,6 @@ const withErrorHandler = (WrappedComponent: any, axios: any) => {
       this.resInterceptor = axios.interceptors.response.use(null, (error: any) => {
         this.setState({ error, hasError: true });
       })
-    }
-
-    public componentWillUnmount(): void {
-      axios.interceptors.eject(this.reqInterceptor);
-      axios.interceptors.eject(this.resInterceptor);
     }
 
     public clearError = (): void => this.setState({ error: { message: '' }, hasError: false });

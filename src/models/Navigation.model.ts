@@ -5,18 +5,15 @@ export interface INavItems {
 export interface ILinkItem {
   link: string;
   name: string;
-  active: boolean;
 }
 
 export const LINKS = [
   {
-    active: true,
     link: '/',
     name: 'Burger Builder'
   },
   {
-    active: false,
-    link: '/',
-    name: 'Checkout'
+    link: '/orders',
+    name: 'Orders'
   },
 ]

@@ -16,7 +16,7 @@ class OrderSummary extends React.Component {
 			)
 		);
 		return (
-			<React.Fragment>
+			<div className="Align">
 			<h3>Your Order</h3>
 			<p>Includes:</p>
 			<ul>
@@ -24,9 +24,9 @@ class OrderSummary extends React.Component {
 			</ul>
 			<p>Total Price: <strong>{this.props.totalPrice.toFixed(2)}</strong></p>
 			<p>Continue to Checkout?</p>
-			<Button clicked={this.props.purchaseCanceled} buttonType='Danger'>CANCEL</Button>
-			<Button clicked={this.props.purchaseContinued} buttonType='Success'>CONTINUE</Button>
-		</React.Fragment>
+			<Button type="text" clicked={this.props.purchaseCanceled} buttonType='Danger'>CANCEL</Button>
+			<Button type="text" clicked={this.props.purchaseContinued} buttonType='Success'>CONTINUE</Button>
+		</div>
 		)
 	}
 

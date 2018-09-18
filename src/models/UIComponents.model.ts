@@ -2,6 +2,7 @@ export interface IButtonProps {
   buttonType: string;
   clicked: () => void;
   children: string;
+  type: string;
 }
 
 export interface ILogoProps {

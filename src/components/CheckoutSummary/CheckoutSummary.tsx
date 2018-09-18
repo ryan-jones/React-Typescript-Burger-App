@@ -9,8 +9,8 @@ const checkoutSummary = (props: any): JSX.Element => {
       <div className="BurgerHolder">
         <Burger {...props.ingredients}/>
       </div>
-      <Button clicked={props.clicked} buttonType="Danger">Cancel</Button>
-      <Button clicked={props.clicked} buttonType="Success">Continue</Button>
+      <Button type="text" clicked={props.onCheckoutCanceled} buttonType="Danger">Cancel</Button>
+      <Button type="text" clicked={props.onCheckoutContinued} buttonType="Success">Continue</Button>
 
     </div>
   )

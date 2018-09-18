@@ -4,7 +4,6 @@ import Burger from '../../components/Burger/Burger';
 import OrderSummary from '../../components/OrderSummary/OrderSummary';
 import Modal from '../../components/UI/Modal/Modal';
 import Spinner from '../../components/UI/Spinner/Spinner';
-import withError from '../../hoc/withError/withError';
 import { IBurgerState } from '../../models/Burger.model';
 import Ingredients, { INGREDIENT_PRICES } from '../../models/Ingredients.model';
 import axiosInstance from '../../axios/orders';
@@ -68,21 +67,15 @@ class BurgerBuilder extends React.Component<RouteComponentProps<{}>, IBurgerStat
 	public purchaseCancelHandler = ():void => this.setState({ modalActive: false });
 
 	public purchaseContinueHandler = (): void => {
-		this.props.history.push('/checkout');
-		// this.setState({ loading: true });
-		// const { ingredients, totalPrice } = this.state;
-		// const order = {
-		// 	ingredients,
-		// 	totalPrice,
-		// 	customer: {
-		// 		name: 'Ryan',
-		// 		address: '123 street',
-		// 		deliveryMethod: 'fastest'
-		// 	}
-		// }
-		// axiosInstance.post('/orders.json', order)
-		// 	.then(_ => this.setState({ loading: false, modalActive: false }))
-		// 	.catch(_ => this.setState({ loading: false, modalActive: false }));
+		const params:string[] = [];
+		Object.keys(this.state.ingredients).forEach((ingredient: string) => {
+			params.push(`${encodeURIComponent(ingredient)}=${encodeURIComponent(this.state.ingredients[ingredient])}`)
+		});
+		params.push(`price=${this.state.totalPrice}`);
+		this.props.history.push({ 
+			pathname: '/checkout', 
+			search: `?${params.join('&')}`
+		});
 	};
 
 	public render(): JSX.Element {
@@ -116,4 +109,4 @@ class BurgerBuilder extends React.Component<RouteComponentProps<{}>, IBurgerStat
 	}
 }
 
-export default withError(BurgerBuilder, axiosInstance);
+export default BurgerBuilder;
