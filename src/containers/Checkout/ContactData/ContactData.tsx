@@ -1,10 +1,10 @@
 import * as React from 'react';
 import Button from '../../../components/UI/Button/Button';
 import './ContactData.scss';
-import axiosInstance from '../../../axios/orders';
 import Spinner from '../../../components/UI/Spinner/Spinner';
 import Input from '../../../components/UI/Input/Input';
 import { connect } from 'react-redux';
+import * as actions from '../../../store/actions';
 
 class ContactData extends React.Component<any, any> {
 
@@ -88,16 +88,13 @@ class ContactData extends React.Component<any, any> {
         validation: {},
         valid: true
       },
-    },
-   
-    loading: false
+    },   
   }
 
   public orderHandler = (event: any): void => {
     event.preventDefault();
-    this.setState({ loading: true });
 
-    const formData = Object.keys(this.state.orderForm).reduce((data, newValue) => {
+    const orderData = Object.keys(this.state.orderForm).reduce((data, newValue) => {
       data[newValue] = this.state.orderForm[newValue].value;
       return data;
     }, {});
@@ -105,14 +102,10 @@ class ContactData extends React.Component<any, any> {
 		const order = { 
       ingredients: this.props.ingredients, 
       price: this.props.price, 
-      orderData: formData };
+      orderData
+    };
 
-		axiosInstance.post('/orders.json', order)
-			.then(_ => {
-        this.setState({ loading: false });
-        this.props.history.push('/');
-      })
-			.catch(_ => this.setState({ loading: false }));
+    this.props.onOrderBurger(order);
   }
 
   public inputChangedHandler = (event: any, inputValue: string): void => {
@@ -144,7 +137,7 @@ class ContactData extends React.Component<any, any> {
     const formElements = Object.keys(this.state.orderForm).reduce((form, element) => 
       [...form, { id: element, config: this.state.orderForm[element] }], []);
 
-    const elem = this.state.loading 
+    const elem = this.props.loading 
       ? <Spinner />
       : <React.Fragment>
           <h4>Enter your contact information</h4>
@@ -174,8 +167,13 @@ class ContactData extends React.Component<any, any> {
 }
 
 const mapStateToProps = (state: any) => ({
-  price: state.totalPrice,
-  ingredients: state.ingredients
+  price: state.burgerBuilder.totalPrice,
+  ingredients: state.burgerBuilder.ingredients,
+  loading: state.orders.loading
 })
 
-export default connect(mapStateToProps)(ContactData);
+const mapDispatchToProps = (dispatch: any) => ({
+  onOrderBurger: (orderData: object) => dispatch(actions.purchaseBurger(orderData))
+})
+
+export default connect(mapStateToProps, mapDispatchToProps)(ContactData);

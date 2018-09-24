@@ -1,14 +1,10 @@
-import * as actionTypes from './actions';
-import { INGREDIENT_PRICES } from '../models/Ingredients.model';
-import IStore from '../models/store.model';
+import * as actionTypes from '../actions/actionTypes';
+import { INGREDIENT_PRICES } from '../../models/Ingredients.model';
+import IStore from '../../models/store.model';
 
 const initialState: IStore = {
-  ingredients: {
-    salad: 0,
-    bacon: 0,
-    cheese: 0,
-    meat: 0
-  },
+  ingredients: {},
+  error: false,
   totalPrice: 0
 }
 
@@ -33,10 +29,20 @@ const reducer = (state: IStore = initialState, action: any) => {
           [action.ingredientName]: state.ingredients[action.ingredientName] - 1
         }
       }
-    default:
+    case actionTypes.SET_INGREDIENTS:
       return {
-        ...state
+        ...state,
+        ingredients: action.ingredients,
+        error: false,
+        totalPrice: 0
       }
+    case actionTypes.FETCH_INGREDIENTS_FAILED:
+      return {
+        ...state,
+        error: true
+      }
+    default:
+      return state
   }
 }
 
